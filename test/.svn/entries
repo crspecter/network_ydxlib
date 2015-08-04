@@ -1,0 +1,40 @@
+10
+
+dir
+5
+https://10.2.15.100/svn/network_ydxlib/trunk/test
+https://10.2.15.100/svn/network_ydxlib
+
+
+
+2015-07-24T08:55:21.096000Z
+2
+cr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+b70a6bfe-462c-874e-a6e6-d72f9dcedff8
+
+sender
+dir
+
+receiver
+dir
+
+tcp_client
+dir
+
+tcp_server
+dir
+
