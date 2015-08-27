@@ -10,7 +10,7 @@
 #include <sys/eventfd.h>
 #include <boost/bind.hpp>
 #include "socket_ops.h"
-
+#include "logging.h"
 using namespace ydx;
 
 namespace
@@ -24,7 +24,7 @@ int createEventfd()
 	int evtfd = ::eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC);
 	if (evtfd < 0)
 	{
-		std::cout << "Failed in eventfd";
+		LOG_INFO << "Failed in eventfd";
 		abort();
 	}
 	return evtfd;
@@ -286,7 +286,7 @@ void EPollPoller::wakeup()
 	ssize_t n = sockets::write(wakeupFd_, &one, sizeof one);
 	if (n != sizeof one)
 	{
-		std::cout << "EventLoop::wakeup() writes " << n << " bytes instead of 8"<<std::endl;
+		LOG_INFO << "EventLoop::wakeup() writes " << n << " bytes instead of 8" ;
 	}
 }
 
@@ -323,7 +323,7 @@ void EPollPoller::handleRead()
 	ssize_t n = sockets::read(wakeupFd_, &one, sizeof one);
 	if (n != sizeof one)
 	{
-		std::cout << "EventLoop::handleRead() reads " << n << " bytes instead of 8" <<std::endl;
+		LOG_INFO << "EventLoop::handleRead() reads " << n << " bytes instead of 8" ;
 	}
 }
 

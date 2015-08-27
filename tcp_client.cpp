@@ -6,7 +6,7 @@
 #include "tcp_connection.h"
 #include "socket_ops.h"
 #include "connector.h"
-
+#include "logging.h"
 using namespace ydx;
 
 
@@ -30,7 +30,7 @@ TcpClient::TcpClient(EPollPoller * epoller,
 
 TcpClient::~TcpClient()
 {
-	std::cout << "TcpClient::~TcpClient[" << name_
+	LOG_INFO << "TcpClient::~TcpClient[" << name_
 	       << "] - connector " << get_pointer(connector_);
 	TcpConnectionPtr conn;
 	bool unique = false;
@@ -56,8 +56,8 @@ TcpClient::~TcpClient()
 void TcpClient::connect()
 {
   // FIXME: check state
-  std::cout << "TcpClient::connect[" << name_ << "] - connecting to "
-           << connector_->serverAddress().toIpPort() << std::endl;
+  LOG_INFO << "TcpClient::connect[" << name_ << "] - connecting to "
+           << connector_->serverAddress().toIpPort();
 
 
   //connect_ = true;

@@ -7,6 +7,7 @@
 #include <iostream>
 #include <boost/make_shared.hpp> 
 #include <unistd.h>
+#include "logging.h"
 using namespace ydx;
 
 
@@ -36,9 +37,9 @@ void Sender::start()
 
 void Sender::onConnection(const TcpConnectionPtr& conn)
 {
-	  std::cout << "EchoServer - " << conn->peerAddress().toIpPort() << " -> "
+	  LOG_INFO << "EchoServer - " << conn->peerAddress().toIpPort() << " -> "
            << conn->localAddress().toIpPort() << " is "
-           << (conn->connected() ? "UP" : "DOWN")<< std::endl;
+           << (conn->connected() ? "UP" : "DOWN");
 	  
 }
 

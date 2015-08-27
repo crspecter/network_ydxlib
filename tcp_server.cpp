@@ -7,6 +7,7 @@
 #include <boost/bind.hpp>
 #include <stdio.h>
 #include <iostream>
+#include "logging.h"
 using namespace ydx;
 
 TcpServer::TcpServer(EPollPoller* epoll,
@@ -29,7 +30,7 @@ TcpServer::TcpServer(EPollPoller* epoll,
 TcpServer::~TcpServer()
 {
   
-  std::cout << "TcpServer::~TcpServer [" << name_ << "] destructing" << std::endl;
+  LOG_INFO << "TcpServer::~TcpServer [" << name_ << "] destructing";
 
   for (ConnectionMap::iterator it(connections_.begin());
       it != connections_.end(); ++it)
@@ -67,9 +68,9 @@ void TcpServer::newConnection(int sockfd, const InetAddress& peerAddr)
 	++nextConnId_;
 	std::string connName = name_ + buf;
 
-	std::cout << "TcpServer::newConnection [" << name_
+	LOG_INFO << "TcpServer::newConnection [" << name_
 	   << "] - new connection [" << connName
-	   << "] from " << peerAddr.toIpPort() <<std::endl;
+	   << "] from " << peerAddr.toIpPort();
 	InetAddress localAddr(sockets::getLocalAddr(sockfd));
 	// FIXME poll with zero timeout to double confirm the new connection
 	// FIXME use make_shared if necessary
@@ -97,11 +98,16 @@ void TcpServer::removeConnection(const TcpConnectionPtr& conn)
 void TcpServer::removeConnectionInLoop(const TcpConnectionPtr& conn)
 {
   
-  std::cout << "TcpServer::removeConnectionInLoop [" << name_
-           << "] - connection " << conn->name() << std::endl;
+  LOG_INFO << "TcpServer::removeConnectionInLoop [" << name_
+           << "] - connection " << conn->name();
 
   
   EPollPoller* ioLoop = conn->getLoop();
   ioLoop->queueInLoop(
       boost::bind(&TcpConnection::connectDestroyed, conn));
+  
+  const std::string &str = conn->name();
+  ConnectionMap::iterator it = connections_.find(str);
+  it->second.reset();
+  connections_.erase(it);
 }

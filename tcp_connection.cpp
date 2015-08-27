@@ -5,11 +5,12 @@
 #include "channel.h"
 #include <iostream>
 #include "epoller.h"
+#include "logging.h"
 using namespace ydx;
 
 void ydx::defaultConnectionCallback(const TcpConnectionPtr& conn)
 {
-  	std::cout << conn->localAddress().toIpPort() << " -> "
+  	LOG_INFO << conn->localAddress().toIpPort() << " -> "
             << conn->peerAddress().toIpPort() << " is "
             << (conn->connected() ? "UP" : "DOWN");
   // do not call conn->forceClose(), because some users want to register message callback only.

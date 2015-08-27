@@ -7,6 +7,7 @@
 #include "stream_buffer.h"
 #include "tcp_server.h"
 #include "epoller.h"
+#include "logging.h"
 using namespace ydx;
 
 
@@ -31,9 +32,9 @@ Receiver::~Receiver()
 
 void Receiver::onConnection(const TcpConnectionPtr& conn)
 {
-	  std::cout << "EchoServer - " << conn->peerAddress().toIpPort() << " -> "
+	  LOG_INFO << "EchoServer - " << conn->peerAddress().toIpPort() << " -> "
            << conn->localAddress().toIpPort() << " is "
-           << (conn->connected() ? "UP" : "DOWN") << std::endl;
+           << (conn->connected() ? "UP" : "DOWN");
 
 
 }

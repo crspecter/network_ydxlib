@@ -7,18 +7,15 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
-
+#include "logging.h"
 using namespace ydx;
 
 const int Connector::kMaxRetryDelayMs;
 
-__thread char t_errnobuf[512];
 
 
-const char* strerror_tl(int err_)
-{
-  return strerror_r(err_, t_errnobuf, sizeof(t_errnobuf));
-}
+
+
 
 Connector::Connector(EPollPoller* ep, const InetAddress& serverAddr)
   : state_(kDisconnected),
