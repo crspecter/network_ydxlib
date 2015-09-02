@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 #include <string.h>
-
+#include "logging.h"
 using namespace ydx;
 
 struct text_msg
@@ -22,9 +22,9 @@ struct text_msg
 
 void onConnection(const TcpConnectionPtr& conn)
 {
-	  std::cout << "EchoServer - " << conn->peerAddress().toIpPort() << " -> "
+	  LOG_INFO << "EchoServer - " << conn->peerAddress().toIpPort() << " -> "
            << conn->localAddress().toIpPort() << " is "
-           << (conn->connected() ? "UP" : "DOWN") <<std::endl;
+           << (conn->connected() ? "UP" : "DOWN");
 }
 
 void onMessage(const TcpConnectionPtr& conn,

@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/network_ydxlib/!svn/ver/16/trunk/test/logging
+END
+logging_test.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/network_ydxlib/!svn/ver/19/trunk/test/logging/logging_test.cpp
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/network_ydxlib/!svn/ver/16/trunk/test/logging/Makefile
+END

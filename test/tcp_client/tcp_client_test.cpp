@@ -5,6 +5,7 @@
 #include <boost/bind.hpp>
 #include <stdio.h>
 #include <string.h>
+#include "logging.h"
 using namespace ydx;
 
 struct text_msg
@@ -17,7 +18,7 @@ struct text_msg
 
 void onConnection(const TcpConnectionPtr& conn)
 {
-	  std::cout << "EchoClient - " << conn->peerAddress().toIpPort() << " -> "
+	  LOG_INFO << "EchoClient - " << conn->peerAddress().toIpPort() << " -> "
            << conn->localAddress().toIpPort() << " is "
            << (conn->connected() ? "UP" : "DOWN");
 

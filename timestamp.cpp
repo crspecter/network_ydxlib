@@ -1,5 +1,6 @@
 #include "timestamp.h"
 
+
 #include <sys/time.h>
 #include <stdio.h>
 #include <boost/static_assert.hpp>
@@ -8,6 +9,7 @@
 #ifndef __STDC_FORMAT_MACROS
 #define __STDC_FORMAT_MACROS
 #endif
+#include <inttypes.h>
 
 using namespace ydx;
 
@@ -19,7 +21,7 @@ std::string Timestamp::to_string() const
 	char buf[32] = {0};
 	int64_t seconds = micro_seconds_since_epoch_ / micro_seconds_per_sec;
 	int64_t microseconds = micro_seconds_since_epoch_ % micro_seconds_per_sec;
-	snprintf(buf, sizeof(buf) - 1, "%" PRId64 ".%06" PRId64 "", seconds, microseconds);
+	snprintf(buf, sizeof(buf) - 1, "%ld"  ".%06ld" , seconds, microseconds);
 	return buf;
 }
 
@@ -55,6 +57,8 @@ Timestamp Timestamp::now()
 	int64_t seconds = tv.tv_sec;
 	return Timestamp(seconds * micro_seconds_per_sec + tv.tv_usec);
 }
+
+
 
 
 CTime::CTime( time_t time)
@@ -139,3 +143,4 @@ std::string CTime::GetTime()
 	CTime ctime(::time( NULL ));
 	return ctime.Format();
 }
+

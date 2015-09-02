@@ -9,3 +9,9 @@ svn:wc:ra_dav:version-url
 V 72
 /svn/network_ydxlib/!svn/ver/2/trunk/test/receiver/ydx_receiver_test.cpp
 END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/network_ydxlib/!svn/ver/16/trunk/test/receiver/Makefile
+END

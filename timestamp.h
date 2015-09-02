@@ -3,10 +3,11 @@
 #include <stdint.h>
 #include <string>
 #include <inttypes.h>
+#include <boost/operators.hpp>
 namespace ydx
 {
 
-class Timestamp
+class Timestamp: public boost::less_than_comparable<Timestamp>
 {
 public:
 	Timestamp()
@@ -30,7 +31,7 @@ public:
 
 	
 	bool valid() const { return micro_seconds_since_epoch_ > 0;}
-
+	void set_micro_second(Timestamp &other){micro_seconds_since_epoch_ = other.get_micro_second();}
 	int64_t get_micro_second() const { return micro_seconds_since_epoch_;}
 	time_t seconds_since_epoch() const
 	{
@@ -54,15 +55,6 @@ public:
 	}
 	  
 
-inline bool operator<(Timestamp rhs)
-{
-  return micro_seconds_since_epoch_ < rhs.get_micro_second();
-}
-
-inline bool operator==(Timestamp rhs)
-{
-  return micro_seconds_since_epoch_ == rhs.get_micro_second();
-}
 	
 	static const int micro_seconds_per_sec = 1000 * 1000;
 private:
@@ -77,6 +69,16 @@ inline Timestamp addTime(Timestamp timestamp, double seconds)
   return Timestamp(timestamp.get_micro_second() + delta);
 }
 
+inline bool operator<(Timestamp lhs, Timestamp rhs)
+{
+  return lhs.get_micro_second() < rhs.get_micro_second();
+}
+
+inline bool operator==(Timestamp lhs, Timestamp rhs)
+{
+  return lhs.get_micro_second() == rhs.get_micro_second();
+}
+
 
 inline double timeDifference(Timestamp high, Timestamp low)
 {
@@ -84,6 +86,11 @@ inline double timeDifference(Timestamp high, Timestamp low)
   return static_cast<double>(diff) / Timestamp::micro_seconds_per_sec;
 }
 
+inline int64_t timeDifferenceMicro(Timestamp high, Timestamp low)
+{
+  int64_t diff = high.get_micro_second() - low.get_micro_second();
+  return diff / 1000;
+}
 
 class CTime
 {

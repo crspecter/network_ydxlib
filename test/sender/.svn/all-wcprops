@@ -9,3 +9,9 @@ svn:wc:ra_dav:version-url
 V 68
 /svn/network_ydxlib/!svn/ver/2/trunk/test/sender/ydx_sender_test.cpp
 END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/network_ydxlib/!svn/ver/16/trunk/test/sender/Makefile
+END

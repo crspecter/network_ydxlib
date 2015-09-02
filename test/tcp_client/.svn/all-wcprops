@@ -6,6 +6,12 @@ END
 tcp_client_test.cpp
 K 25
 svn:wc:ra_dav:version-url
-V 72
-/svn/network_ydxlib/!svn/ver/2/trunk/test/tcp_client/tcp_client_test.cpp
+V 73
+/svn/network_ydxlib/!svn/ver/23/trunk/test/tcp_client/tcp_client_test.cpp
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/network_ydxlib/!svn/ver/16/trunk/test/tcp_client/Makefile
 END
